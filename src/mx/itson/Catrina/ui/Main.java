@@ -8,7 +8,9 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
@@ -40,7 +42,7 @@ public class Main extends javax.swing.JFrame {
         cbxMes.addItem("Octubre");
         cbxMes.addItem("Noviembre");
         cbxMes.addItem("Diciembre");
-
+        
     }
 
     /**
@@ -57,13 +59,24 @@ public class Main extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbxMes = new javax.swing.JComboBox<>();
-        lblNombre = new javax.swing.JLabel();
+        lblCuentaContable = new javax.swing.JLabel();
         lblSaldoInicial = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMovimientos = new javax.swing.JTable();
         lblDeposito = new javax.swing.JLabel();
         lblRetiro = new javax.swing.JLabel();
         lblSaldoFinal = new javax.swing.JLabel();
+        lblCp = new javax.swing.JLabel();
+        lblMoneda = new javax.swing.JLabel();
+        lblDireccion = new javax.swing.JLabel();
+        lblCiudad = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblRfc = new javax.swing.JLabel();
+        lblCuenta = new javax.swing.JLabel();
+        lblClabe = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblSaldoFinalPeriodo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -78,23 +91,28 @@ public class Main extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, -1, -1));
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, -1, -1));
 
         jLabel4.setText("Seleccione el archivo a cargar");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, -1, -1));
 
         jLabel5.setText("Seleccione el mes");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 6, -1, -1));
 
         jPanel1.add(cbxMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, -1, -1));
 
-        lblNombre.setBackground(new java.awt.Color(0, 102, 51));
-        lblNombre.setOpaque(true);
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 296, 21));
+        lblCuentaContable.setBackground(new java.awt.Color(0, 102, 51));
+        lblCuentaContable.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCuentaContable.setForeground(new java.awt.Color(0, 0, 0));
+        lblCuentaContable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCuentaContable.setText("CUENTA CONTABLE");
+        lblCuentaContable.setOpaque(true);
+        jPanel1.add(lblCuentaContable, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 70, 300, 21));
 
-        lblSaldoInicial.setBackground(new java.awt.Color(0, 102, 51));
+        lblSaldoInicial.setForeground(new java.awt.Color(0, 0, 0));
+        lblSaldoInicial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSaldoInicial.setOpaque(true);
-        jPanel1.add(lblSaldoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 296, 20));
+        jPanel1.add(lblSaldoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 300, 20));
 
         tblMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,29 +127,83 @@ public class Main extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblMovimientos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 950, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 960, 320));
 
         lblDeposito.setText("DEPOSITO");
         lblDeposito.setOpaque(true);
-        jPanel1.add(lblDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 250, -1));
+        jPanel1.add(lblDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 300, -1));
 
         lblRetiro.setText("RETIRO");
         lblRetiro.setOpaque(true);
-        jPanel1.add(lblRetiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 250, -1));
+        jPanel1.add(lblRetiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 300, -1));
 
         lblSaldoFinal.setText("SALDO FINAL");
         lblSaldoFinal.setOpaque(true);
-        jPanel1.add(lblSaldoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 200, -1));
+        jPanel1.add(lblSaldoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 300, -1));
+
+        lblCp.setOpaque(true);
+        jPanel1.add(lblCp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 300, 20));
+
+        lblMoneda.setOpaque(true);
+        jPanel1.add(lblMoneda, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 300, 20));
+
+        lblDireccion.setOpaque(true);
+        jPanel1.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 300, 20));
+
+        lblCiudad.setOpaque(true);
+        jPanel1.add(lblCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 300, 20));
+
+        lblNombre.setBackground(new java.awt.Color(0, 102, 51));
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
+        lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombre.setOpaque(true);
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 300, 21));
+
+        lblRfc.setOpaque(true);
+        jPanel1.add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 300, 20));
+
+        lblCuenta.setOpaque(true);
+        jPanel1.add(lblCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, 300, 20));
+
+        lblClabe.setOpaque(true);
+        jPanel1.add(lblClabe, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 300, 20));
+
+        jLabel1.setBackground(new java.awt.Color(0, 102, 51));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("RESUMEN DEL PERIODO");
+        jLabel1.setOpaque(true);
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 300, -1));
+
+        lblSaldoFinalPeriodo.setBackground(new java.awt.Color(0, 102, 51));
+        lblSaldoFinalPeriodo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSaldoFinalPeriodo.setForeground(new java.awt.Color(0, 0, 0));
+        lblSaldoFinalPeriodo.setText("Saldo final del periodo: ");
+        lblSaldoFinalPeriodo.setOpaque(true);
+        jPanel1.add(lblSaldoFinalPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 650, 360, -1));
+
+        jLabel2.setBackground(new java.awt.Color(0, 102, 51));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("ESTADO DE CUENTA");
+        jLabel2.setOpaque(true);
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 320, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -139,50 +211,72 @@ public class Main extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
-
+            
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
             if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                 // Si sí selecciona un archivo
                 File archivo = fileChooser.getSelectedFile();
                 byte archivoBytes[] = Files.readAllBytes(archivo.toPath());
-
+                
                 String contenido = new String(archivoBytes, StandardCharsets.UTF_8);
                 int contador = cbxMes.getSelectedIndex();
-
+                //deserializamos el gson en la clase EstadoCuenta
                 EstadoCuenta cuenta = new EstadoCuenta().deserializar(contenido);
-                lblNombre.setText(cuenta.getCliente().getNombre());
+                double subtotal = cuenta.ConsultarSaldoInicial(contador);
+//              creamos un formato para la fecha
+                DateFormat formatoFecha = new SimpleDateFormat("dd '/' MM '/' yyyy");
+//              creamos un formato para la moneda
+                NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance();
+                Locale espanolEs = new Locale("es","MX");
 
+                //Ponemos los datos del cliente en etiquetas
+                lblNombre.setText(cuenta.getCliente().getNombre().toUpperCase());
+                lblRfc.setText("RFC: " + cuenta.getCliente().getRfc());
+                lblCp.setText("C.P " + cuenta.getCliente().getCp());
+                lblDireccion.setText(cuenta.getCliente().getDomicilio());
+                lblCiudad.setText(cuenta.getCliente().getCiudad());
+
+//Ponemos los datos de la cuenta contable en etiquetas
+                lblCuenta.setText("Cuenta: " + cuenta.getCuenta());
+                lblClabe.setText("Clabe: " + cuenta.getClabe());
+                lblMoneda.setText("Moneda: " + cuenta.getMoneda());
+
+//ponenmos los datos del resumen del periodo en etiquetas
+                lblSaldoInicial.setText(formatoMoneda.format(subtotal));
+
+//ponemos la sumatoria del saldo final del periodo en una etiqueta
+                lblSaldoFinalPeriodo.setText("");
+                
                 DefaultTableModel modelo = (DefaultTableModel) tblMovimientos.getModel();
                 modelo.setRowCount(0);
 
-                DateFormat formatoFecha = new SimpleDateFormat("dd '/' MM '/' yyyy");
 
-                double subtotal = cuenta.ConsultarSaldoInicial(contador);
 
+//                double subtotal = cuenta.ConsultarSaldoInicial(contador);
                 for (Movimiento m : cuenta.FiltrarMovimientos(contador)) {
                     switch (m.getTipo()) {
                         case DEPOSITO:
                             subtotal = subtotal + m.getCantidad();
                             modelo.addRow(new Object[]{formatoFecha.format(m.getFecha()),
                                 m.getDescripcion(),
-                                m.getCantidad(),
+                                formatoMoneda.format(m.getCantidad()),
                                 "",
-                                subtotal});
+                                formatoMoneda.format(subtotal)});
                             break;
-
+                        
                         case RETIRO:
                             subtotal = subtotal - m.getCantidad();
                             modelo.addRow(new Object[]{formatoFecha.format(m.getFecha()),
                                 m.getDescripcion(),
                                 "",
-                                m.getCantidad(),
-                                subtotal});
+                                formatoMoneda.format(m.getCantidad()),
+                               formatoMoneda.format(subtotal)});
                             break;
                     }
-
+                    
                 }
-
+                
             }
         } catch (Exception e) {
             System.err.print("Ocurrió un error: " + e.getMessage());
@@ -227,14 +321,25 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox<String> cbxMes;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCiudad;
+    private javax.swing.JLabel lblClabe;
+    private javax.swing.JLabel lblCp;
+    private javax.swing.JLabel lblCuenta;
+    private javax.swing.JLabel lblCuentaContable;
     private javax.swing.JLabel lblDeposito;
+    private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblMoneda;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRetiro;
+    private javax.swing.JLabel lblRfc;
     private javax.swing.JLabel lblSaldoFinal;
+    private javax.swing.JLabel lblSaldoFinalPeriodo;
     private javax.swing.JLabel lblSaldoInicial;
     private javax.swing.JTable tblMovimientos;
     // End of variables declaration//GEN-END:variables

@@ -26,6 +26,7 @@ public class EstadoCuenta {
     /**
      * @return the producto
      */
+//Este metodo deserializa los datos extraidos de un gson 
     public EstadoCuenta deserializar(String json) {
         EstadoCuenta cuenta = new EstadoCuenta();
 
@@ -119,6 +120,13 @@ public class EstadoCuenta {
         this.cliente = cliente;
     }
 
+    /**
+     * Este metodo filtra los movimientos y los compara con el mes obtenido de
+     * una ComboBox para extraer solo los datos //correspondientes a ese mes
+     * @param mes que se comparara con el mes obtenido del gson //@return los
+     * datos del mes seleccionado
+*
+     */
     public List<Movimiento> FiltrarMovimientos(int mes) {
         List<Movimiento> obtenerMovimientos = new ArrayList();
 
@@ -133,6 +141,11 @@ public class EstadoCuenta {
 
     }
 
+    /*
+    / Este metodo validara el saldo inicial, teniendo en cuenta si es de Tipo Deposito o Retiro
+    /@param mes 
+    /@return retorna la cantidad guardada en un double saldoInicial
+     */
     public double ConsultarSaldoInicial(int mes) {
         double saldoInicial = 0;
         for (Movimiento movimiento : movimientos) {
@@ -147,11 +160,23 @@ public class EstadoCuenta {
         return saldoInicial;
     }
 
+    /*
+    /Este metodo va a calcular el saldo final, consultado saldo inicial, sumando el total de depositos y restando el total de los retiros
+    /@param mes
+    /@return retorna el total de las operaciones realizadas
+     */
+//    public double ConsultarSaldoFinal(int mes) {
+//        double saldoFinal = (ConsultarSaldoInicial(mes) + ConsultarDepositos(mes) - ConsultarRetiros(mes));
+//        return saldoFinal;
+//    }
 
-
-//public double ConsultarDepositos(int mes){
-//
-//
-//}
-
+    /*
+    /Este metodo va a calcular el total de los depositos
+    /  @param mes
+    /  @return la suma total de los depositos
+     */
+     //public double ConsultarDepositos(int mes){
+     //
+     //
+     //}
 }
