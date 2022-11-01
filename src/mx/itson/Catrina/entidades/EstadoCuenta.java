@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import mx.itson.Catrina.entidades.*;
+import mx.itson.Catrina.enumerador.Tipo;
 
 /**
  *
@@ -131,5 +132,26 @@ public class EstadoCuenta {
         return obtenerMovimientos;
 
     }
+
+    public double ConsultarSaldoInicial(int mes) {
+        double saldoInicial = 0;
+        for (Movimiento movimiento : movimientos) {
+            for (int i = 0; i < mes; i++) {
+                if (movimiento.getFecha().getMonth() == i && movimiento.getTipo() == Tipo.DEPOSITO) {
+                    saldoInicial = saldoInicial + movimiento.getCantidad();
+                } else if (movimiento.getFecha().getMonth() == i && movimiento.getTipo() == Tipo.RETIRO) {
+                    saldoInicial = saldoInicial - movimiento.getCantidad();
+                }
+            }
+        }
+        return saldoInicial;
+    }
+
+
+
+//public double ConsultarDepositos(int mes){
+//
+//
+//}
 
 }

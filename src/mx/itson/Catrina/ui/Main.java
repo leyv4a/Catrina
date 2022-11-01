@@ -86,7 +86,6 @@ public class Main extends javax.swing.JFrame {
         jLabel5.setText("Seleccione el mes");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 6, -1, -1));
 
-        cbxMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(cbxMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, -1, -1));
 
         lblNombre.setBackground(new java.awt.Color(0, 102, 51));
@@ -159,19 +158,26 @@ public class Main extends javax.swing.JFrame {
 
                 DateFormat formatoFecha = new SimpleDateFormat("dd '/' MM '/' yyyy");
 
-                for (Movimiento m : cuenta.getMovimientos()) {
+                double subtotal = cuenta.ConsultarSaldoInicial(contador);
+
+                for (Movimiento m : cuenta.FiltrarMovimientos(contador)) {
                     switch (m.getTipo()) {
                         case DEPOSITO:
+                            subtotal = subtotal + m.getCantidad();
                             modelo.addRow(new Object[]{formatoFecha.format(m.getFecha()),
                                 m.getDescripcion(),
                                 m.getCantidad(),
-                                ""});
+                                "",
+                                subtotal});
                             break;
+
                         case RETIRO:
+                            subtotal = subtotal - m.getCantidad();
                             modelo.addRow(new Object[]{formatoFecha.format(m.getFecha()),
                                 m.getDescripcion(),
                                 "",
-                                m.getCantidad()});
+                                m.getCantidad(),
+                                subtotal});
                             break;
                     }
 
