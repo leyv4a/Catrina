@@ -5,26 +5,27 @@
 package mx.itson.Catrina.entidades;
 
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
+import mx.itson.Catrina.entidades.*;
 
 /**
  *
  * @author gabri
  */
 public class EstadoCuenta {
-    
-private String producto;
-private String cuenta;
-private String clabe;
-private String moneda;
-private String cliente;
-private List<Movimiento> movimientos;
+
+    private String producto;
+    private String cuenta;
+    private String clabe;
+    private String moneda;
+    private Cliente cliente;
+    private List<Movimiento> movimientos;
 
     /**
      * @return the producto
      */
-
-  public EstadoCuenta deserializar(String json) {
+    public EstadoCuenta deserializar(String json) {
         EstadoCuenta cuenta = new EstadoCuenta();
 
         try {
@@ -35,6 +36,7 @@ private List<Movimiento> movimientos;
         return cuenta;
 
     }
+
     public String getProducto() {
         return producto;
     }
@@ -89,20 +91,6 @@ private List<Movimiento> movimientos;
     }
 
     /**
-     * @return the cliente
-     */
-    public String getCliente() {
-        return cliente;
-    }
-
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
-    /**
      * @return the movimientos
      */
     public List<Movimiento> getMovimientos() {
@@ -116,5 +104,32 @@ private List<Movimiento> movimientos;
         this.movimientos = movimientos;
     }
 
+    /**
+     * @return the cliente
+     */
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Movimiento> FiltrarMovimientos(int mes) {
+        List<Movimiento> obtenerMovimientos = new ArrayList();
+
+        for (Movimiento obtenerMovimiento : movimientos) {
+            if (obtenerMovimiento.getFecha().getMonth() == mes) {
+                obtenerMovimientos.add(obtenerMovimiento);
+
+            }
+        }
+        obtenerMovimientos.sort((m1, m2) -> m1.getFecha().compareTo(m2.getFecha()));
+        return obtenerMovimientos;
+
+    }
 
 }

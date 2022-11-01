@@ -4,17 +4,17 @@
  */
 package mx.itson.Catrina.ui;
 
-import java.awt.Color;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
-import mx.itson.Catrina.entidades.Cliente;
-import mx.itson.Catrina.entidades.Datos;
-import mx.itson.Catrina.entidades.EstadoCuenta;
-import mx.itson.Catrina.entidades.Usuario;
+import mx.itson.Catrina.entidades.*;
+
+;
 
 /**
  *
@@ -28,7 +28,19 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setLocationRelativeTo(null);
-        jLabel6.setBackground(Color.red);
+        cbxMes.addItem("Enero");
+        cbxMes.addItem("Febrero");
+        cbxMes.addItem("Marzo");
+        cbxMes.addItem("Abril");
+        cbxMes.addItem("Mayo");
+        cbxMes.addItem("Junio");
+        cbxMes.addItem("Julio");
+        cbxMes.addItem("Agosto");
+        cbxMes.addItem("Septiembre");
+        cbxMes.addItem("Octubre");
+        cbxMes.addItem("Noviembre");
+        cbxMes.addItem("Diciembre");
+
     }
 
     /**
@@ -45,15 +57,20 @@ public class Main extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbxMes = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblSaldoInicial = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCliente = new javax.swing.JTable();
+        tblMovimientos = new javax.swing.JTable();
+        lblDeposito = new javax.swing.JLabel();
+        lblRetiro = new javax.swing.JLabel();
+        lblSaldoFinal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 700));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,71 +78,51 @@ public class Main extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 30, -1, -1));
 
         jLabel4.setText("Seleccione el archivo a cargar");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, -1, -1));
 
         jLabel5.setText("Seleccione el mes");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 6, -1, -1));
 
         cbxMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(cbxMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, -1, -1));
 
-        jLabel6.setBackground(new java.awt.Color(0, 102, 51));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("ESTADO DE CUENTA");
-        jLabel6.setOpaque(true);
+        lblNombre.setBackground(new java.awt.Color(0, 102, 51));
+        lblNombre.setOpaque(true);
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 296, 21));
 
-        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+        lblSaldoInicial.setBackground(new java.awt.Color(0, 102, 51));
+        lblSaldoInicial.setOpaque(true);
+        jPanel1.add(lblSaldoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 296, 20));
+
+        tblMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                ""
+                "Fecha", "Descripcion", "Deposito", "Retiro", "Sub Total"
             }
         ));
-        jScrollPane1.setViewportView(tblCliente);
+        jScrollPane1.setViewportView(tblMovimientos);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(btnBuscar)))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(461, Short.MAX_VALUE))
-        );
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 950, -1));
+
+        lblDeposito.setText("DEPOSITO");
+        lblDeposito.setOpaque(true);
+        jPanel1.add(lblDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 250, -1));
+
+        lblRetiro.setText("RETIRO");
+        lblRetiro.setOpaque(true);
+        jPanel1.add(lblRetiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 250, -1));
+
+        lblSaldoFinal.setText("SALDO FINAL");
+        lblSaldoFinal.setOpaque(true);
+        jPanel1.add(lblSaldoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,10 +149,33 @@ public class Main extends javax.swing.JFrame {
                 byte archivoBytes[] = Files.readAllBytes(archivo.toPath());
 
                 String contenido = new String(archivoBytes, StandardCharsets.UTF_8);
+                int contador = cbxMes.getSelectedIndex();
 
-                DefaultTableModel cliente = (DefaultTableModel) tblCliente.getModel();
-                EstadoCuenta cuenta = new EstadoCuenta();
+                EstadoCuenta cuenta = new EstadoCuenta().deserializar(contenido);
+                lblNombre.setText(cuenta.getCliente().getNombre());
 
+                DefaultTableModel modelo = (DefaultTableModel) tblMovimientos.getModel();
+                modelo.setRowCount(0);
+
+                DateFormat formatoFecha = new SimpleDateFormat("dd '/' MM '/' yyyy");
+
+                for (Movimiento m : cuenta.getMovimientos()) {
+                    switch (m.getTipo()) {
+                        case DEPOSITO:
+                            modelo.addRow(new Object[]{formatoFecha.format(m.getFecha()),
+                                m.getDescripcion(),
+                                m.getCantidad(),
+                                ""});
+                            break;
+                        case RETIRO:
+                            modelo.addRow(new Object[]{formatoFecha.format(m.getFecha()),
+                                m.getDescripcion(),
+                                "",
+                                m.getCantidad()});
+                            break;
+                    }
+
+                }
 
             }
         } catch (Exception e) {
@@ -203,9 +223,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxMes;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblCliente;
+    private javax.swing.JLabel lblDeposito;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblRetiro;
+    private javax.swing.JLabel lblSaldoFinal;
+    private javax.swing.JLabel lblSaldoInicial;
+    private javax.swing.JTable tblMovimientos;
     // End of variables declaration//GEN-END:variables
 }

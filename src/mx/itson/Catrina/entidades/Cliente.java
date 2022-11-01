@@ -4,6 +4,8 @@
  */
 package mx.itson.Catrina.entidades;
 
+import com.google.gson.Gson;
+
 /**
  *
  * @author gabri
@@ -16,6 +18,23 @@ public class Cliente {
     private String ciudad;
     private String rfc;
     private int cp;
+
+//    public Cliente deserializar(String json) {
+//        Cliente cliente = new Cliente();
+//
+//        try {
+//            cliente = new Gson().fromJson(json, Cliente.class);
+//        } catch (Exception ex) {
+//            System.err.print("Ocurrió un error: " + ex.getMessage());
+//        }
+//        return cliente;
+//
+//    }
+//
+//    public Object[] ObtenerDatos() {
+//        Object[] Datos = {getNombre(), getDomicilio(), getCiudad(), getRfc(), getCp()};
+//        return Datos;
+//    }
 
     /**
      * @return the codigo
@@ -100,6 +119,5 @@ public class Cliente {
     public void setCp(int cp) {
         this.cp = cp;
     }
-
 
 }

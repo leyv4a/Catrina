@@ -5,6 +5,7 @@
 package mx.itson.Catrina.entidades;
 
 import java.util.Date;
+import mx.itson.Catrina.enumerador.Tipo;
 
 /**
  *
@@ -15,6 +16,7 @@ public class Movimiento {
 private Date fecha ;
 private String descripcion;
 private double cantidad;
+private Tipo tipo;
 
     /**
      * @return the fecha
@@ -56,6 +58,20 @@ private double cantidad;
      */
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
 
